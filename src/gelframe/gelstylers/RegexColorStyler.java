@@ -42,7 +42,7 @@ class RegexColorStyler extends GelStyler {
 
     @Override
     public void style(GelTextPane gelTextPane) {
-        Matcher m = pattern.matcher(gelTextPane.getText().replaceAll("\n", ""));
+        Matcher m = pattern.matcher(gelTextPane.getText());
         while (m.find()) {
             gelTextPane.getStyledDocument().setCharacterAttributes(
                     m.start(), m.end()-m.start(), attributeSet, true
