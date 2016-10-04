@@ -39,14 +39,19 @@ public class GelTextPane extends JTextPane {
      * Default GelTextPane constructor.
      */
     GelTextPane(){
-        this.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
+        this.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16));
         this.setBackground(new Color(0, 0, 0));
         this.setCursor(new Cursor(Cursor.TEXT_CURSOR));
     }
 
     @Override
     public void paint(Graphics g){
-        this.setCharacterAttributes(def, true);
+        this.getStyledDocument().setCharacterAttributes(
+                0,
+                getStyledDocument().getLength(),
+                def,
+                true
+        );
 
         try {
             for (GelStyler styler : stylers) {

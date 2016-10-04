@@ -35,7 +35,7 @@ public abstract class GelStyler {
     }
 
     /**
-     * Creates a GelStyles from a String.
+     * Creates a GelStyle from a String.
      *
      * @param string The String to create the GelStyler from.
      * @return The created GelStyler.

@@ -28,6 +28,9 @@ public class GelFrame extends JFrame {
         this.gelTextPane = new GelTextPane();
         this.add(gelTextPane);
 
+        JScrollPane jScrollPane = new JScrollPane(gelTextPane);
+        this.add(jScrollPane);
+
         this.setTitle("Gel");
         this.setSize(1080, 720);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
