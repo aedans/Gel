@@ -17,7 +17,7 @@ public class Gel {
      */
     public static void main(String[] args) throws Exception {
         GelFrame gelFrame = new GelFrame();
-        gelFrame.loadConfig(new File("./java/config"));
+        gelFrame.loadConfig(new File(args[0]));
     }
 
 }

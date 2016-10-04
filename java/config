@@ -1,2 +1,4 @@
 styler ./java/stylers/keywords
+styler ./java/stylers/functions
+styler ./java/stylers/numbers
 styler ./java/stylers/comments

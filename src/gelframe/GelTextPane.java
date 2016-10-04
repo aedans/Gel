@@ -7,6 +7,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.util.ConcurrentModificationException;
 import java.util.LinkedList;
 
 /**
@@ -45,11 +46,13 @@ public class GelTextPane extends JTextPane {
 
     @Override
     public void paint(Graphics g){
-        GelTextPane.this.setCharacterAttributes(def, true);
+        this.setCharacterAttributes(def, true);
 
-        for (GelStyler styler : stylers){
-            styler.style(this);
-        }
+        try {
+            for (GelStyler styler : stylers) {
+                styler.style(this);
+            }
+        } catch (ConcurrentModificationException ignored){}
 
         super.paint(g);
     }
