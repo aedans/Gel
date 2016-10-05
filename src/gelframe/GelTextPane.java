@@ -4,9 +4,13 @@ import gelframe.gelstylers.GelStyler;
 
 import javax.swing.*;
 import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.*;
 import java.util.ConcurrentModificationException;
 import java.util.LinkedList;
 
@@ -38,11 +42,13 @@ public class GelTextPane extends JTextPane {
     /**
      * Default GelTextPane constructor.
      */
-    GelTextPane(){
+    GelTextPane(File file){
         this.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16));
         this.setBackground(new Color(0, 0, 0));
         this.setCursor(new Cursor(Cursor.TEXT_CURSOR));
         this.setCaretColor(Color.WHITE);
+
+        new Thread(new AutoSaver(file, getStyledDocument(), 1000)).start();
     }
 
     @Override

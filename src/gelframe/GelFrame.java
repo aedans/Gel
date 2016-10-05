@@ -4,10 +4,7 @@ import gelframe.gelstylers.GelStyler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.Objects;
 
 /**
@@ -23,13 +20,10 @@ public class GelFrame extends JFrame {
      */
     private GelTextPane gelTextPane;
 
-    /**
-     * Default GelFrame constructor.
-     */
-    private GelFrame(){
+    private GelFrame(File file){
         this.setLayout(new BorderLayout());
 
-        this.gelTextPane = new GelTextPane();
+        this.gelTextPane = new GelTextPane(file);
         this.add(gelTextPane, SwingConstants.CENTER);
 
         JScrollPane jScrollPane = new JScrollPane(gelTextPane);
@@ -43,8 +37,8 @@ public class GelFrame extends JFrame {
         this.requestFocus();
     }
 
-    public GelFrame(String arg) throws FileNotFoundException {
-        this();
+    public GelFrame(String arg) throws IOException {
+        this(new File(arg));
         final String[] content = {""};
         new BufferedReader(new FileReader(new File(arg))).lines().forEach(s -> content[0] += s + '\n');
         this.gelTextPane.setText(content[0]);
