@@ -1,2 +1,1 @@
-@echo off
-java -jar ./jar/Gel.jar ./java/config
+java -jar C:\gel\jar\Gel.jar C:\gel\java\config %1

@@ -1,7 +1,7 @@
-styler ./java/stylers/functions
-styler ./java/stylers/keywords
-styler ./java/stylers/numbers
-styler ./java/stylers/symbols
-styler ./java/stylers/annotations
-styler ./java/stylers/quotes
-styler ./java/stylers/comments
+styler C:/gel/java/stylers/functions
+styler C:/gel/java/stylers/keywords
+styler C:/gel/java/stylers/numbers
+styler C:/gel/java/stylers/symbols
+styler C:/gel/java/stylers/annotations
+styler C:/gel/java/stylers/quotes
+styler C:/gel/java/stylers/comments

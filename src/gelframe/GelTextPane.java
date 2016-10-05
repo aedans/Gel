@@ -42,6 +42,7 @@ public class GelTextPane extends JTextPane {
         this.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16));
         this.setBackground(new Color(0, 0, 0));
         this.setCursor(new Cursor(Cursor.TEXT_CURSOR));
+        this.setCaretColor(Color.WHITE);
     }
 
     @Override
