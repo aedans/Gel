@@ -31,9 +31,9 @@ public class AddRegexColorer extends Command {
 
     private static Pattern colorPattern = Pattern.compile("(\\d+), *(\\d+), *(\\d+)");
 
-    public AddRegexColorer(GelFrame gelFrame) {
+    public AddRegexColorer(GelTextPane gelTextPane) {
         super("addregexcolorer");
-        this.gelTextPane = gelFrame.getGelTextPane();
+        this.gelTextPane = gelTextPane;
         properties[0] = "Adds a regex colorer to the GelFrame";
         properties[1] =
                 "addregexcolorer [string-color] [string-regex]:\n" +
