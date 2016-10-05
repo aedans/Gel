@@ -48,7 +48,7 @@ public class GelTextPane extends JTextPane {
         this.setCursor(new Cursor(Cursor.TEXT_CURSOR));
         this.setCaretColor(Color.WHITE);
 
-        new Thread(new AutoSaver(file, getStyledDocument(), 1000)).start();
+        new Thread(new AutoSaver(file, getStyledDocument(), 500)).start();
     }
 
     @Override
