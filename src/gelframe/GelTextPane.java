@@ -74,7 +74,7 @@ public class GelTextPane extends JTextPane {
      *
      * @param gelStyler The GelStyler to add.
      */
-    void addStyler(GelStyler gelStyler){
+    public void addStyler(GelStyler gelStyler){
         stylers.add(gelStyler);
     }
 

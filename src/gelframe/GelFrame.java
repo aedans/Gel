@@ -5,7 +5,6 @@ import gelframe.gelstylers.GelStyler;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-import java.util.Objects;
 
 /**
  * Created by Aedan Smith on 10/4/2016.
@@ -24,7 +23,7 @@ public class GelFrame extends JFrame {
         this.setLayout(new BorderLayout());
 
         this.gelTextPane = new GelTextPane(file);
-        this.add(gelTextPane, SwingConstants.CENTER);
+        this.add(gelTextPane, BorderLayout.CENTER);
 
         JScrollPane jScrollPane = new JScrollPane(gelTextPane);
         this.add(jScrollPane, BorderLayout.CENTER);
@@ -44,30 +43,8 @@ public class GelFrame extends JFrame {
         this.gelTextPane.setText(content[0]);
     }
 
-    /**
-     * Loads the GelFrame config from a given File.
-     *
-     * @param file The File to load the config from.
-     * @throws Exception If there was an error loading the config.
-     */
-    public void loadConfig(File file) throws Exception {
-        final String[] content = {""};
-        new BufferedReader(new FileReader(file)).lines().forEach(s -> content[0] += s + '\n');
-        loadConfig(content[0]);
-    }
-
-    /**
-     * Loads the GelFrame config from a given String.
-     *
-     * @param config The String to load the config from.
-     * @throws Exception If there was an error loading the config.
-     */
-    private void loadConfig(String config) throws Exception {
-        for (String s : config.split("\n")){
-            if (Objects.equals(s.substring(0, 6), "styler")){
-                gelTextPane.addStyler(GelStyler.fromFile(new File(s.substring(7))));
-            }
-        }
+    public GelTextPane getGelTextPane() {
+        return gelTextPane;
     }
 
 }

@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  * Class for creating Stylers that color a regex.
  */
 
-class RegexColorStyler extends GelStyler {
+public class RegexColorStyler implements GelStyler {
 
     /**
      * The Pattern for the RegexColorStyler.
@@ -33,7 +33,7 @@ class RegexColorStyler extends GelStyler {
      * @param regex The regex for the RegexColorStyler.
      * @param color The Color for the RegexColorStyler.
      */
-    private RegexColorStyler(String regex, Color color) {
+    public RegexColorStyler(String regex, Color color) {
         this.attributeSet = StyleContext.getDefaultStyleContext().addAttribute(
                 StyleContext.getDefaultStyleContext().getEmptySet(), StyleConstants.Foreground, color
         );
@@ -47,34 +47,6 @@ class RegexColorStyler extends GelStyler {
             gelTextPane.getStyledDocument().setCharacterAttributes(
                     m.start(), m.end()-m.start(), attributeSet, true
             );
-        }
-    }
-
-    /**
-     * Pattern for the fromString(s) method.
-     */
-    private static Pattern fromStringPattern = Pattern.compile("(\\d+),(\\d+),(\\d+) (.+)");
-
-    /**
-     * Creates a RegexColorStyler from a String.
-     *
-     * @param s The String to create the RegexColorStyler from.
-     * @return The created RegexColorStyler.
-     * @throws Exception If there was an error creating the RegexColorStyler.
-     */
-    static RegexColorStyler fromString(String s) throws Exception{
-        Matcher m = fromStringPattern.matcher(s);
-        if (m.find()){
-            return new RegexColorStyler(
-                    m.group(4),
-                    new Color(
-                            Integer.parseInt(m.group(1)),
-                            Integer.parseInt(m.group(2)),
-                            Integer.parseInt(m.group(3))
-                    )
-            );
-        } else {
-            throw new Exception("Could not create RegexColorStyler from String " + s);
         }
     }
 
