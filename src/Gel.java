@@ -16,7 +16,7 @@ public class Gel {
      * @param args The array of arguments for the Gel editor (currently unused).
      */
     public static void main(String[] args) throws Exception {
-        GelFrame gelFrame = new GelFrame(args[1]);
+        GelFrame gelFrame = new GelFrame((args.length > 1) ? args[1] : "temp.txt");
         gelFrame.loadConfig(new File(args[0]));
     }
 
