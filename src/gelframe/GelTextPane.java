@@ -3,6 +3,8 @@ package gelframe;
 import gelframe.gelstylers.GelStyler;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyleConstants;
@@ -21,6 +23,8 @@ import java.util.LinkedList;
  */
 
 public class GelTextPane extends JTextPane {
+
+    private boolean hasChanged = true;
 
     /**
      * The StyleContext for the GelTextPane.
@@ -49,22 +53,43 @@ public class GelTextPane extends JTextPane {
         this.setCaretColor(Color.WHITE);
 
         new Thread(new AutoSaver(file, getStyledDocument(), 500)).start();
+
+        this.getStyledDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                hasChanged = true;
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                hasChanged = true;
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                hasChanged = true;
+            }
+        });
     }
 
     @Override
-    public void paint(Graphics g){
-        this.getStyledDocument().setCharacterAttributes(
-                0,
-                getStyledDocument().getLength(),
-                def,
-                true
-        );
+    public void paint(Graphics g) {
+        if (hasChanged) {
+            this.getStyledDocument().setCharacterAttributes(
+                    0,
+                    getStyledDocument().getLength(),
+                    def,
+                    true
+            );
 
-        try {
-            for (GelStyler styler : stylers) {
-                styler.style(this);
+            try {
+                for (GelStyler styler : stylers) {
+                    styler.style(this);
+                }
+            } catch (ConcurrentModificationException ignored) {
             }
-        } catch (ConcurrentModificationException ignored){}
+            hasChanged = false;
+        }
 
         super.paint(g);
     }
@@ -76,6 +101,7 @@ public class GelTextPane extends JTextPane {
      */
     public void addStyler(GelStyler gelStyler){
         stylers.add(gelStyler);
+        gelStyler.style(this);
     }
 
 }
