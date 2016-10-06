@@ -1,1 +1,1 @@
-addregexcolorer 0,200,0 "\\\"[^\\\"\\n]*\\\"|'.'"
+addregexcolorer 0,200,0 \"[^\"\n]+\"|'.'\"
