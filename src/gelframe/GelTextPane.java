@@ -1,6 +1,6 @@
 package gelframe;
 
-import gelframe.gellisteners.NewlineListener;
+import gelframe.gellisteners.GelListener;
 import gelframe.gelstylers.GelStyler;
 
 import javax.swing.*;
@@ -8,14 +8,9 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.LinkedList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by Aedan Smith on 10/4/2016.
@@ -63,7 +58,7 @@ public class GelTextPane extends JTextPane {
 
         new Thread(new AutoSaver(file, getStyledDocument(), 250)).start();
 
-        this.addKeyListener(new NewlineListener(this));
+        this.addKeyListener(new GelListener(this));
 
         this.getStyledDocument().addDocumentListener(new DocumentListener() {
             @Override

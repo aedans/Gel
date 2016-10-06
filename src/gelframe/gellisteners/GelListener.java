@@ -15,16 +15,24 @@ import java.util.regex.Pattern;
  * KeyListener for modifying text after newlines.
  */
 
-public class NewlineListener implements KeyListener {
+public class GelListener implements KeyListener {
 
     private GelTextPane gelTextPane;
 
-    public NewlineListener(GelTextPane gelTextPane){
+    public GelListener(GelTextPane gelTextPane){
         this.gelTextPane = gelTextPane;
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
+        if (e.isShiftDown() && e.getKeyChar() == '\n'){
+            try {
+                gelTextPane.getStyledDocument().insertString(gelTextPane.getCaretPosition(), "\n", gelTextPane.def);
+                return;
+            } catch (BadLocationException e1) {
+                e1.printStackTrace();
+            }
+        }
         if (e.getKeyChar() == '\n'){
             try {
                 Matcher m = Pattern.compile("( +)*[^\n]*").matcher(gelTextPane.getText());
