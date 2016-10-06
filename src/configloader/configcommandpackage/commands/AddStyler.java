@@ -45,6 +45,8 @@ public class AddStyler extends Command {
         for (String s : content[0].split("\n")){
             environment.handleInput(input, s, output);
         }
+
+        output.printf("Added styler from file \"%s\"\n", args.get(1).value + ".styler");
     }
 
 }

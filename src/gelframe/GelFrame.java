@@ -1,6 +1,6 @@
 package gelframe;
 
-import gelframe.gelstylers.GelStyler;
+import gelframe.gelmenu.GelMenu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +19,11 @@ public class GelFrame extends JFrame {
      */
     private GelTextPane gelTextPane;
 
+    /**
+     * The GelMenu for the GelFrame.
+     */
+    private GelMenu gelMenu;
+
     private GelFrame(File file){
         this.setLayout(new BorderLayout());
 
@@ -27,6 +32,8 @@ public class GelFrame extends JFrame {
 
         JScrollPane jScrollPane = new JScrollPane(gelTextPane);
         this.add(jScrollPane, BorderLayout.CENTER);
+
+        this.add(gelMenu = new GelMenu(), BorderLayout.NORTH);
 
         this.setTitle("Gel");
         this.setSize(1080, 720);
@@ -45,6 +52,10 @@ public class GelFrame extends JFrame {
 
     public GelTextPane getGelTextPane() {
         return gelTextPane;
+    }
+
+    public GelMenu getGelMenu() {
+        return gelMenu;
     }
 
 }

@@ -34,6 +34,8 @@ public class ReplaceAll extends Command {
         args.checkMatches(ArgumentType.STRING, ArgumentType.STRING);
 
         gelTextPane.setText(gelTextPane.getText().replaceAll(args.get(1).value, args.get(2).value));
+
+        output.printf("Replaced all instances of \"%s\" with \"%s\"\n", args.get(1).value, args.get(2).value);
     }
 
 }
