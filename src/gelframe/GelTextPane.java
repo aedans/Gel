@@ -1,20 +1,21 @@
 package gelframe;
 
+import gelframe.gellisteners.NewlineListener;
 import gelframe.gelstylers.GelStyler;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyleContext;
+import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.LinkedList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Aedan Smith on 10/4/2016.
@@ -24,6 +25,14 @@ import java.util.LinkedList;
 
 public class GelTextPane extends JTextPane {
 
+    /**
+     * A List of things to do on the next render.
+     */
+    public LinkedList<Runnable> toDo = new LinkedList<>();
+
+    /**
+     * If the GelTextPane has changed since last render.
+     */
     private boolean hasChanged = true;
 
     /**
@@ -34,7 +43,7 @@ public class GelTextPane extends JTextPane {
     /**
      * The default AttributeSet for the GelTextPane.
      */
-    private final AttributeSet def = styleContext.addAttribute(
+    public final AttributeSet def = styleContext.addAttribute(
             styleContext.getEmptySet(), StyleConstants.Foreground, Color.WHITE
     );
 
@@ -52,7 +61,9 @@ public class GelTextPane extends JTextPane {
         this.setCursor(new Cursor(Cursor.TEXT_CURSOR));
         this.setCaretColor(Color.WHITE);
 
-        new Thread(new AutoSaver(file, getStyledDocument(), 500)).start();
+        new Thread(new AutoSaver(file, getStyledDocument(), 250)).start();
+
+        this.addKeyListener(new NewlineListener(this));
 
         this.getStyledDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -74,20 +85,23 @@ public class GelTextPane extends JTextPane {
 
     @Override
     public void paint(Graphics g) {
+        toDo.forEach(Runnable::run);
+        toDo = new LinkedList<>();
+
         if (hasChanged) {
+            // Recolors text
             this.getStyledDocument().setCharacterAttributes(
                     0,
                     getStyledDocument().getLength(),
                     def,
                     true
             );
-
             try {
                 for (GelStyler styler : stylers) {
                     styler.style(this);
                 }
-            } catch (ConcurrentModificationException ignored) {
-            }
+            } catch (ConcurrentModificationException ignored) {}
+
             hasChanged = false;
         }
 
@@ -102,6 +116,12 @@ public class GelTextPane extends JTextPane {
     public void addStyler(GelStyler gelStyler){
         stylers.add(gelStyler);
         gelStyler.style(this);
+    }
+
+    @Override
+    public void setText(String string){
+        super.setText(string);
+        hasChanged = true;
     }
 
 }
