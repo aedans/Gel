@@ -32,7 +32,8 @@ public class AutoSaver implements Runnable {
 
     /**
      * Default AutoSaver constructor.
-     *  @param file The File for the AutoSaver to save to.
+     *
+     * @param file The File for the AutoSaver to save to.
      * @param styledDocument The StyledDocument for the AutoSaver to save from.
      * @param i The number of milliseconds between saves.
      */
