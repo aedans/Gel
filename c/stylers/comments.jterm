@@ -1,0 +1,2 @@
+addregexcolorer 0,200,0 //.*
+addregexcolorer 0,200,0 \/\*[^*]*\*+(?:[^/*][^*]*\*+)*\/

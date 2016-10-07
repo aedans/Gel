@@ -24,7 +24,13 @@ public class GelFrame extends JFrame {
      */
     private GelMenu gelMenu;
 
+    /**
+     * The File that the GelFrame is modifying.
+     */
+    private File file;
+
     private GelFrame(File file){
+        this.file = file;
         this.setLayout(new BorderLayout());
 
         this.gelTextPane = new GelTextPane(file);
@@ -56,6 +62,10 @@ public class GelFrame extends JFrame {
 
     public GelMenu getGelMenu() {
         return gelMenu;
+    }
+
+    public File getFile() {
+        return file;
     }
 
 }

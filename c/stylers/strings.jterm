@@ -1,0 +1,2 @@
+addregexcolorer 200,150,0 \"[^\"\n]+\"
+addregexcolorer 200,150,0 '.'

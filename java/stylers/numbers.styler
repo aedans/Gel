@@ -1,1 +1,0 @@
-addregexcolorer 0,200,200 (?<=[^a-zA-Z])\d+(?:\.\d+)*(?:f|F|d|D)*

@@ -1,1 +1,0 @@
-addregexcolorer 0,150,150 (?<![a-zA-Z])(?:intN_t|int_leastN_t|int_fastN_t|intptr_t|intptr_t|uintN_t|uint_leastN_t|uint_fastN_t|uintptr_t|uintmax_t)(?=[^a-zA-Z])

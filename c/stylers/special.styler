@@ -1,1 +1,0 @@
-addregexcolorer 255,150,0 (?<![a-zA-Z])(?:NULL|FILE|stderr|stdin|stdout)(?=[^a-zA-Z])
