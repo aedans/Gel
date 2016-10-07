@@ -1,2 +1,2 @@
 @echo off
-java -jar C:\gel\jar\Gel.jar C:\gel\java\config %1
+java -jar C:\gel\jar\Gel.jar load:%1 startup:C:\gel\java\config 2> C:\gel\debug

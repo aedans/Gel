@@ -29,8 +29,7 @@ public class GelFrame extends JFrame {
      */
     private File file;
 
-    private GelFrame(File file){
-        this.file = file;
+    public GelFrame(){
         this.setLayout(new BorderLayout());
 
         this.gelTextPane = new GelTextPane(file);
@@ -49,10 +48,11 @@ public class GelFrame extends JFrame {
         this.requestFocus();
     }
 
-    public GelFrame(String arg) throws IOException {
-        this(new File(arg));
+    public void loadFile(String path) throws FileNotFoundException {
+        this.file = new File(path);
+        this.gelTextPane.setFile(file);
         final String[] content = {""};
-        new BufferedReader(new FileReader(new File(arg))).lines().forEach(s -> content[0] += s + '\n');
+        new BufferedReader(new FileReader(file)).lines().forEach(s -> content[0] += s + '\n');
         this.gelTextPane.setText(content[0]);
     }
 

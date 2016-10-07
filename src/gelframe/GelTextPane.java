@@ -56,8 +56,6 @@ public class GelTextPane extends JTextPane {
         this.setCursor(new Cursor(Cursor.TEXT_CURSOR));
         this.setCaretColor(Color.WHITE);
 
-        new Thread(new AutoSaver(file, getStyledDocument(), 250)).start();
-
         this.addKeyListener(new GelListener(this));
 
         this.getStyledDocument().addDocumentListener(new DocumentListener() {
@@ -117,6 +115,10 @@ public class GelTextPane extends JTextPane {
     public void setText(String string){
         super.setText(string);
         hasChanged = true;
+    }
+
+    public void setFile(File file) {
+        new Thread(new AutoSaver(file, getStyledDocument(), 250)).start();
     }
 
 }
