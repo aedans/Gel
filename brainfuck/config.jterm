@@ -1,3 +1,5 @@
 exec C:/gel/brainfuck/stylers/comments
 exec C:/gel/brainfuck/stylers/loops
 exec C:/gel/brainfuck/stylers/io
+
+refresh

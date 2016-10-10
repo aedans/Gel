@@ -24,6 +24,7 @@ public class GelCommandPackage implements CommandPackage {
     public void addCommands(Environment environment) {
         environment.addCommand(new AddButton(gelFrame));
         environment.addCommand(new AddRegexColorer(gelFrame));
+        environment.addCommand(new Refresh(gelFrame));
         environment.addCommand(new LoadFile(gelFrame));
 //        environment.addCommand(new LoadDirectory(gelFrame));
         environment.addCommand(new SaveAll(gelFrame));

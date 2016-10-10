@@ -87,18 +87,7 @@ public class GelTextPane extends JTextPane {
         toDo = new LinkedList<>();
 
         if (hasChanged) {
-            // Recolors text
-            this.getStyledDocument().setCharacterAttributes(
-                    0,
-                    getStyledDocument().getLength(),
-                    def,
-                    true
-            );
-            try {
-                for (GelStyler styler : stylers) {
-                    styler.style(this);
-                }
-            } catch (ConcurrentModificationException ignored) {}
+            refresh();
 
             hasChanged = false;
         }
@@ -113,13 +102,27 @@ public class GelTextPane extends JTextPane {
      */
     public void addStyler(GelStyler gelStyler){
         stylers.add(gelStyler);
-        gelStyler.style(this);
     }
 
     @Override
     public void setText(String string){
         super.setText(string);
         hasChanged = true;
+    }
+
+    public void refresh() {
+        // Recolors text
+        this.getStyledDocument().setCharacterAttributes(
+                0,
+                getStyledDocument().getLength(),
+                def,
+                true
+        );
+        try {
+            for (GelStyler styler : stylers) {
+                styler.style(this);
+            }
+        } catch (ConcurrentModificationException ignored) {}
     }
 
 }
