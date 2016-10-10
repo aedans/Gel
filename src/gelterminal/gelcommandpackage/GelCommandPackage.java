@@ -2,6 +2,7 @@ package gelterminal.gelcommandpackage;
 
 import com.aedan.jterminal.commands.CommandPackage;
 import com.aedan.jterminal.environment.Environment;
+import gelterminal.Associations;
 import gelterminal.gelcommandpackage.commands.*;
 import gelframe.GelFrame;
 
