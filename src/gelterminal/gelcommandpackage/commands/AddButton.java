@@ -7,6 +7,7 @@ import com.aedan.jterminal.commands.commandarguments.CommandArgumentList;
 import com.aedan.jterminal.environment.Environment;
 import com.aedan.jterminal.input.CommandInput;
 import com.aedan.jterminal.output.CommandOutput;
+import gelframe.GelFrame;
 import gelframe.gelmenu.GelMenu;
 
 import javax.swing.*;
@@ -18,11 +19,11 @@ import java.awt.event.ActionEvent;
 
 public class AddButton extends Command {
 
-    private GelMenu gelMenu;
+    private GelFrame gelFrame;
 
-    public AddButton(GelMenu gelMenu) {
+    public AddButton(GelFrame gelFrame) {
         super("addbutton");
-        this.gelMenu = gelMenu;
+        this.gelFrame = gelFrame;
         this.properties[0] = "Adds a button to the Gel menu that executes a given command.";
         this.properties[1] =
                 "addbutton [string-name] [string-command]:\n" +
@@ -46,7 +47,7 @@ public class AddButton extends Command {
             }
         });
         jButton.setText(args.get(1).value);
-        gelMenu.add(jButton);
+        gelFrame.getActiveWindow().getGelMenu().add(jButton);
 
         output.printf("Added button \"%s\" with Action \"%s\"\n", args.get(1).value, args.get(2).value);
     }

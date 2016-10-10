@@ -1,5 +1,3 @@
 exec C:/gel/brainfuck/stylers/comments
 exec C:/gel/brainfuck/stylers/loops
 exec C:/gel/brainfuck/stylers/io
-
-addbutton run "exec C:\\gel\\brainfuck\\runtime\\run"

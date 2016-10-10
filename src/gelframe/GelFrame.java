@@ -1,10 +1,13 @@
 package gelframe;
 
-import gelframe.gelmenu.GelMenu;
+import gelframe.gelfilewindow.GelFileWindow;
+import gelframe.gelmenu.GelFileMenu;
+import gelframe.gelfilewindow.geltextpane.GelFile;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Created by Aedan Smith on 10/4/2016.
@@ -15,57 +18,94 @@ import java.io.*;
 public class GelFrame extends JFrame {
 
     /**
-     * The TextPane for the GelFrame.
+     * The GelFileMenu for the GelFrame.
      */
-    private GelTextPane gelTextPane;
+    private GelFileMenu gelFileMenu = new GelFileMenu();
 
     /**
-     * The GelMenu for the GelFrame.
+     * The List of GelFileWindows in the GelFrame.
      */
-    private GelMenu gelMenu;
+    private ArrayList<GelFileWindow> gelFileWindows = new ArrayList<>();
 
     /**
-     * The File that the GelFrame is modifying.
+     * The active GelFileWindow.
      */
-    private File file;
+    private GelFileWindow activeWindow;
 
+    /**
+     * Default GelFrame constructor.
+     */
     public GelFrame(){
         this.setLayout(new BorderLayout());
 
-        this.gelTextPane = new GelTextPane(file);
-        this.add(gelTextPane, BorderLayout.CENTER);
-
-        JScrollPane jScrollPane = new JScrollPane(gelTextPane);
-        this.add(jScrollPane, BorderLayout.CENTER);
-
-        this.add(gelMenu = new GelMenu(), BorderLayout.NORTH);
+        this.add(gelFileMenu, BorderLayout.LINE_START);
 
         this.setTitle("Gel");
         this.setSize(1080, 720);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
         this.setVisible(true);
         this.requestFocus();
     }
 
-    public void loadFile(String path) throws FileNotFoundException {
-        this.file = new File(path);
-        this.gelTextPane.setFile(file);
+    /**
+     * Loads a GelFile into the GelFrame with a GelFileWindow.
+     *
+     * @param file The File to load.
+     * @throws FileNotFoundException If the File cannot be found.
+     */
+    public void loadFile(GelFile file) throws FileNotFoundException {
+        GelFileWindow gelFileWindow = new GelFileWindow(file);
+
         final String[] content = {""};
-        new BufferedReader(new FileReader(file)).lines().forEach(s -> content[0] += s + '\n');
-        this.gelTextPane.setText(content[0]);
+        new BufferedReader(new FileReader(file.getFile())).lines().forEach(s -> content[0] += s + '\n');
+        gelFileWindow.getGelTextPane().setText(content[0]);
+
+        this.gelFileMenu.add(gelFileWindow, this);
+        this.add(gelFileWindow, BorderLayout.CENTER);
+        this.setVisibleWindow(gelFileWindow);
+
+        this.gelFileWindows.add(gelFileWindow);
+
+        this.getRootPane().updateUI();
+        this.getLayeredPane().updateUI();
     }
 
-    public GelTextPane getGelTextPane() {
-        return gelTextPane;
+    /**
+     * Sets the visible GelFileWindow.
+     *
+     * @param gelFileWindow The GelFileWindow to set visible.
+     */
+    public void setVisibleWindow(GelFileWindow gelFileWindow){
+        for (GelFileWindow gelFileWindow1 : gelFileWindows){
+            gelFileWindow1.setVisible(false);
+        }
+        gelFileWindow.setVisible(true);
+        this.activeWindow = gelFileWindow;
     }
 
-    public GelMenu getGelMenu() {
-        return gelMenu;
+    /**
+     * Saves all currently open GelFiles.
+     */
+    public void saveAll() {
+        for (GelFileWindow gelFileWindow : gelFileWindows){
+            try {
+                gelFileWindow.save();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
     }
 
-    public File getFile() {
-        return file;
+    public GelFileWindow getActiveWindow() {
+        return activeWindow;
+    }
+
+    public GelFileMenu getGelFileMenu() {
+        return gelFileMenu;
+    }
+
+    public ArrayList<GelFileWindow> getGelFileWindows() {
+        return gelFileWindows;
     }
 
 }

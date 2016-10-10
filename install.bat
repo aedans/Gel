@@ -7,8 +7,4 @@ xcopy brainfuck c:\gel\brainfuck /i /s
 xcopy jar C:\gel\jar /i /s
 
 copy gel.bat C:\gel\gel.bat
-copy javagel.bat C:\gel\javagel.bat
-copy bfgel.bat C:\gel\bfgel.bat
-copy cgel.bat C:\gel\cgel.bat
-
-copy dlls\cygwin1.dll C:\gel\cygwin1.dll
+copy associations C:\gel\associations

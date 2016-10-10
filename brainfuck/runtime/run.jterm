@@ -1,1 +1,0 @@
-exect {+ "\"C:\\gel\\brainfuck\\runtime\\brainfuck.exe\" -e " %TEXT%}

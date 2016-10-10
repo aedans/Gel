@@ -7,8 +7,9 @@ import com.aedan.jterminal.commands.commandarguments.CommandArgumentList;
 import com.aedan.jterminal.environment.Environment;
 import com.aedan.jterminal.input.CommandInput;
 import com.aedan.jterminal.output.CommandOutput;
-import gelframe.GelTextPane;
-import gelframe.gelstylers.RegexColorStyler;
+import gelframe.GelFrame;
+import gelframe.gelfilewindow.geltextpane.GelTextPane;
+import gelframe.gelfilewindow.geltextpane.gelstylers.RegexColorStyler;
 
 import java.awt.*;
 import java.util.regex.Matcher;
@@ -22,13 +23,13 @@ import java.util.regex.Pattern;
 
 public class AddRegexColorer extends Command {
 
-    private GelTextPane gelTextPane;
+    private GelFrame gelFrame;
 
     private static Pattern colorPattern = Pattern.compile("(\\d+), *(\\d+), *(\\d+)");
 
-    public AddRegexColorer(GelTextPane gelTextPane) {
+    public AddRegexColorer(GelFrame gelFrame) {
         super("addregexcolorer");
-        this.gelTextPane = gelTextPane;
+        this.gelFrame = gelFrame;
         properties[0] = "Adds a regex colorer to the GelFrame";
         properties[1] =
                 "addregexcolorer [string-color] [string-regex]:\n" +
@@ -42,7 +43,7 @@ public class AddRegexColorer extends Command {
 
         Matcher m = colorPattern.matcher(args.get(1).value);
         if (m.find())
-        gelTextPane.addStyler(new RegexColorStyler(
+            gelFrame.getActiveWindow().getGelTextPane().addStyler(new RegexColorStyler(
                 args.get(2).value,
                 new Color(
                         Integer.parseInt(m.group(1)),
