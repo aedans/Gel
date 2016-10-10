@@ -49,6 +49,14 @@ public class LoadFile extends Command {
                 new ExecuteJTermFile().parse(
                         input,
                         new CommandArgumentList(new String[]{
+                                "exec", "C:/gel/default/config"
+                        }),
+                        environment,
+                        output
+                );
+                new ExecuteJTermFile().parse(
+                        input,
+                        new CommandArgumentList(new String[]{
                                 "exec",
                                 Associations.getAssociation(f).getAbsolutePath()
                         }),
