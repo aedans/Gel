@@ -1,1 +1,1 @@
-addregexcolorer 0,255,200 \w+(?=\()
+addregexcolorer 0,255,200 "\\w+(?=\\()"

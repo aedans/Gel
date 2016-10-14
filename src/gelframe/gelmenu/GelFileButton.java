@@ -6,6 +6,7 @@ import gelframe.gelfilewindow.geltextpane.GelFile;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.*;
 
 /**
  * Created by Aedan Smith on 10/7/2016.
@@ -14,6 +15,8 @@ import java.awt.event.ActionEvent;
  */
 
 class GelFileButton extends JButton {
+
+    public static final int textLength = 24;
 
     /**
      * Default GelFileButton constructor.
@@ -32,7 +35,19 @@ class GelFileButton extends JButton {
                 }
             }
         });
-        this.setText(gelFileWindow.getFile().getFile().getName());
+        this.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+        String name = gelFileWindow.getFile().getFile().getName();
+        if (name.length() <= textLength){
+            for (int i = 0; i < textLength; i++){
+                name += ' ';
+            }
+            name = name.substring(0, textLength);
+        } else { 
+            name = name.substring(0, textLength-3);
+            name += "...";
+        }
+        
+        this.setText(name);
     }
 
 }

@@ -5,6 +5,7 @@ import gelterminal.GelTerminal;
 import gelframe.GelFrame;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import gelterminal.gelcommandpackage.commands.LoadDirectory;
 import gelterminal.gelcommandpackage.commands.LoadFile;
@@ -29,27 +30,36 @@ public class Gel {
         for (String arg : args){
             if (arg.startsWith("startup:")){
                 System.out.println("Loading " + arg.substring(8) + ".jterm");
+                ArrayList<String> exec = new ArrayList<>();
+                exec.add("exec");
+                exec.add(arg.substring(8));
                 new ExecuteJTermFile().parse(
                         gelTerminal.getInput(),
-                        new CommandArgumentList(new String[]{"exec", arg.substring(8)}),
+                        new CommandArgumentList(exec),
                         gelTerminal.getEnvironment(),
                         gelTerminal.getOutput()
                 );
             }
             if (arg.startsWith("loadf:")){
                 System.out.println("Loading file " + arg.substring(6));
+                ArrayList<String> exec = new ArrayList<>();
+                exec.add("loadfile");
+                exec.add(arg.substring(6));
                 new LoadFile(gelFrame).parse(
                         gelTerminal.getInput(),
-                        new CommandArgumentList(new String[]{"loadfile", arg.substring(6)}),
+                        new CommandArgumentList(exec),
                         gelTerminal.getEnvironment(),
                         gelTerminal.getOutput()
                 );
             }
             if (arg.startsWith("loadd:")){
                 System.out.println("Loading directory " + arg.substring(6));
+                ArrayList<String> exec = new ArrayList<>();
+                exec.add("loaddir");
+                exec.add(arg.substring(6));
                 new LoadDirectory(gelFrame).parse(
                         gelTerminal.getInput(),
-                        new CommandArgumentList(new String[]{"loaddir", arg.substring(6)}),
+                        new CommandArgumentList(exec),
                         gelTerminal.getEnvironment(),
                         gelTerminal.getOutput()
                 );

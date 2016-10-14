@@ -24,7 +24,7 @@ public final class Associations {
     /**
      * The List of associated File paths.
      */
-    private static LinkedList<File> filePaths = new LinkedList<>();
+    private static LinkedList<String> associations = new LinkedList<>();
 
     /**
      * Loads Associations from a file.
@@ -33,24 +33,22 @@ public final class Associations {
      * @throws FileNotFoundException If the associations file cannot be found.
      */
     public static void loadAssociations(File file) throws FileNotFoundException {
-        final String[] content = {""};
-        new BufferedReader(new FileReader(file)).lines().forEach(s -> content[0] += s + '\n');
-        Pattern p = Pattern.compile("([^\n ]+) ([^\n]+)");
-        Matcher m = p.matcher(content[0]);
-        while (m.find()){
-            fileTypes.add(m.group(1));
-            filePaths.add(new File(m.group(2)));
+        for (File f : file.listFiles()){
+            final String[] content = {""};
+            new BufferedReader(new FileReader(f)).lines().forEach(s -> content[0] += s + '\n');
+            fileTypes.add(f.getName());
+            associations.add(content[0]);
         }
     }
 
-    public static File getAssociation(File f) {
+    public static String getAssociation(File f) {
         for (int i = 0; i < fileTypes.size(); i++) {
             String s = fileTypes.get(i);
             if (f.getAbsolutePath().endsWith(s)) {
-                return filePaths.get(i);
+                return associations.get(i).trim();
             }
         }
-        return filePaths.getLast();
+        return associations.getLast().trim();
     }
 
 }

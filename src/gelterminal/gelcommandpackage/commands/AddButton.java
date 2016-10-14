@@ -1,14 +1,13 @@
 package gelterminal.gelcommandpackage.commands;
 
 import com.aedan.jterminal.commands.Command;
-import com.aedan.jterminal.commands.CommandHandler;
 import com.aedan.jterminal.commands.commandarguments.ArgumentType;
 import com.aedan.jterminal.commands.commandarguments.CommandArgumentList;
+import com.aedan.jterminal.commands.commandhandler.CommandHandler;
 import com.aedan.jterminal.environment.Environment;
 import com.aedan.jterminal.input.CommandInput;
 import com.aedan.jterminal.output.CommandOutput;
 import gelframe.GelFrame;
-import gelframe.gelmenu.GelMenu;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -33,14 +32,15 @@ public class AddButton extends Command {
     @Override
     public void parse(CommandInput input, CommandArgumentList args, Environment environment, CommandOutput output)
             throws CommandHandler.CommandHandlerException {
-        args.checkMatches(ArgumentType.STRING, ArgumentType.STRING);
+        if (args.matches(ArgumentType.STRING, ArgumentType.STRING) != 0)
+            throw new CommandHandler.CommandHandlerException("Incorrect arguments given");
 
         JButton jButton = new JButton();
         jButton.setAction(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    environment.handleInput(input, args.get(2).value, output);
+                    environment.getCommandHandler().handleInput(args.get(2).value);
                 } catch (CommandHandler.CommandHandlerException e1) {
                     System.out.println(e1.getMessage());
                 }

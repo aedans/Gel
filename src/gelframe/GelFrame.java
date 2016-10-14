@@ -38,10 +38,10 @@ public class GelFrame extends JFrame {
     public GelFrame(){
         this.setLayout(new BorderLayout());
 
-        this.add(gelFileMenu, BorderLayout.LINE_START);
+        this.add(gelFileMenu, BorderLayout.WEST);
 
         this.setTitle("Gel");
-        this.setSize(1080, 720);
+        this.setSize(1600, 900);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.requestFocus();
@@ -94,6 +94,14 @@ public class GelFrame extends JFrame {
                 e.printStackTrace();
             }
         }
+    }
+    
+    public void refresh() {
+        for (GelFileWindow gelFileWindow : gelFileWindows) {
+            gelFileWindow.refresh();
+        }
+        this.getRootPane().updateUI();
+        this.getLayeredPane().updateUI();
     }
 
     public GelFileWindow getActiveWindow() {

@@ -1,8 +1,8 @@
 package gelterminal.gelcommandpackage.commands;
 
 import com.aedan.jterminal.commands.Command;
-import com.aedan.jterminal.commands.CommandHandler;
 import com.aedan.jterminal.commands.commandarguments.CommandArgumentList;
+import com.aedan.jterminal.commands.commandhandler.CommandHandler;
 import com.aedan.jterminal.environment.Environment;
 import com.aedan.jterminal.input.CommandInput;
 import com.aedan.jterminal.output.CommandOutput;

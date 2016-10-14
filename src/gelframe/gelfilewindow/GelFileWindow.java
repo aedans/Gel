@@ -59,6 +59,11 @@ public class GelFileWindow extends JComponent {
         file.setContent(gelTextPane.getText());
         file.save();
     }
+    
+    public void refresh() {
+        gelTextPane.refresh();
+        this.getRootPane().updateUI();
+    }
 
     public GelFile getFile() {
         return file;

@@ -1,14 +1,13 @@
 package gelterminal.gelcommandpackage.commands;
 
 import com.aedan.jterminal.commands.Command;
-import com.aedan.jterminal.commands.CommandHandler;
 import com.aedan.jterminal.commands.commandarguments.ArgumentType;
 import com.aedan.jterminal.commands.commandarguments.CommandArgumentList;
+import com.aedan.jterminal.commands.commandhandler.CommandHandler;
 import com.aedan.jterminal.environment.Environment;
 import com.aedan.jterminal.input.CommandInput;
 import com.aedan.jterminal.output.CommandOutput;
 import gelframe.GelFrame;
-import gelframe.gelfilewindow.geltextpane.GelTextPane;
 import gelframe.gelfilewindow.geltextpane.gelstylers.RegexColorStyler;
 
 import java.awt.*;
@@ -39,7 +38,8 @@ public class AddRegexColorer extends Command {
     @Override
     public void parse(CommandInput input, CommandArgumentList args, Environment environment, CommandOutput output)
             throws CommandHandler.CommandHandlerException {
-        args.checkMatches(ArgumentType.STRING, ArgumentType.STRING);
+        if (args.matches(ArgumentType.STRING, ArgumentType.STRING) != 0)
+            throw new CommandHandler.CommandHandlerException("Incorrect arguments given");
 
         Matcher m = colorPattern.matcher(args.get(1).value);
         if (m.find())

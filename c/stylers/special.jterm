@@ -1,1 +1,1 @@
-addregexcolorer 255,0,150 (?<![a-zA-Z])(?:NULL|VOID|FILE|stderr|stdin|stdout|true|false)(?=[^a-zA-Z])
+addregexcolorer 255,0,150 "(?<![a-zA-Z])(?:NULL|VOID|FILE|stderr|stdin|stdout|true|false)(?=[^a-zA-Z])"

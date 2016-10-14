@@ -2,7 +2,7 @@ package gelterminal;
 
 import com.aedan.jterminal.JTerminal;
 import com.aedan.jterminal.commandpackages.defaultpackage.DefaultPackage;
-import com.aedan.jterminal.commands.CommandHandler;
+import com.aedan.jterminal.commands.commandhandler.CommandHandler;
 import com.aedan.jterminal.commands.CommandPackage;
 import com.aedan.jterminal.input.CommandInput;
 import com.aedan.jterminal.output.CommandOutput;
@@ -17,7 +17,7 @@ import gelframe.GelFrame;
 
 public class GelTerminal extends JTerminal {
 
-    public GelTerminal(GelFrame gelFrame){
+    public GelTerminal(GelFrame gelFrame) {
         super("", new DefaultPackage(), new GelCommandPackage(gelFrame));
     }
 
