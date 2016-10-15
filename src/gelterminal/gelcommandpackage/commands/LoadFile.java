@@ -8,6 +8,7 @@ import com.aedan.jterminal.commands.commandhandler.CommandHandler;
 import com.aedan.jterminal.environment.Environment;
 import com.aedan.jterminal.input.CommandInput;
 import com.aedan.jterminal.output.CommandOutput;
+import com.aedan.jterminal.utils.FileUtils;
 import gelframe.GelFrame;
 import gelframe.gelfilewindow.geltextpane.GelFile;
 import gelterminal.Associations;
@@ -43,6 +44,9 @@ public class LoadFile extends Command {
 
         try {
             File f = environment.getDirectory().getFile(args.get(1).value);
+            if (!f.exists()){
+                output.println(FileUtils.createFile(f));
+            }
             if (f.exists() && f.canWrite() && f.isFile() && f.length() < Integer.MAX_VALUE) {
                 gelFrame.loadFile(new GelFile(f));
                 environment.addGlobalVariable("fpath", args.get(1).value);
@@ -64,7 +68,7 @@ public class LoadFile extends Command {
                 }
                 environment.removeGlobalVariable("fpath");
             }
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             throw new CommandHandler.CommandHandlerException(e.getMessage());
         }
     }
