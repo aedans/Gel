@@ -12,7 +12,7 @@ import gelframe.GelFrame;
 /**
  * Created by Aedan Smith on 10/5/2016.
  *
- * Terminal for loading config.jterm files.
+ * The Gel terminal.
  */
 
 public class GelTerminal extends JTerminal {

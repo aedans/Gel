@@ -1,0 +1,2 @@
+echo [fpath]
+exec {match [fpath] "([^\\.]+).jterm"}

@@ -28,6 +28,7 @@ public class GelCommandPackage implements CommandPackage {
         environment.addCommand(new LoadFile(gelFrame));
         environment.addCommand(new LoadDirectory(gelFrame));
         environment.addCommand(new SaveAll(gelFrame));
+        environment.addCommandPackage(new PopupCommandPackage());
 
 //        environment.addEnvironmentVariable(new Variable() {
 //            @Override
