@@ -41,15 +41,13 @@ public class AddButton extends Command {
             public void actionPerformed(ActionEvent e) {
                 try {
                     environment.getCommandHandler().handleInput(args.get(2).value);
-                } catch (CommandHandler.CommandHandlerException e1) {
-                    System.out.println(e1.getMessage());
+                } catch (CommandHandler.CommandHandlerException n) {
+                    System.out.println(n.getMessage());
                 }
             }
         });
         jButton.setText(args.get(1).value);
         gelFrame.getActiveWindow().getGelMenu().add(jButton);
-
-        output.printf("Added button \"%s\" with Action \"%s\"\n", args.get(1).value, args.get(2).value);
     }
 
 }

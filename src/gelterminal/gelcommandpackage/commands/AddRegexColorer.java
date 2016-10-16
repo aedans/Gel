@@ -51,8 +51,6 @@ public class AddRegexColorer extends Command {
                         Integer.parseInt(m.group(3))
                 )
         ));
-
-        output.printf("Added RegexColorer for color \"%s\" with regex \"%s\"\n", args.get(1).value, args.get(2).value);
     }
 
 }
